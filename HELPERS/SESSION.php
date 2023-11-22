@@ -19,6 +19,12 @@
             header("Location: $redireccion");
         }
 
+        public static function iniciaSesion2($clave,$valor){
+            SESSION::CreaSesion();
+            $_SESSION[$clave]=$valor;
+        }
+        
+
         public static function estaLogueado($clave) {
             return isset($_SESSION[$clave]) === true;
         }

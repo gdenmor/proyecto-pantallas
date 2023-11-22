@@ -28,21 +28,36 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                             if (isset($tipo)) {
                                                 if ($tipo=="WEB"){
                                                     if (isset($contenido)) {
-                                                        $duracion=0;
-                                                        $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfil,$tipo,$contenido,null,null);
+                                                        $fechai=new DateTime($fechainicio);
+                                                        $fechaf=new DateTime($fechafin);
+                                                        $dias=$fechaf->diff($fechai);
+                                                        $duracion=($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
+                                                        $perfill=PERFIL_REPOSITORY::FindByID2($perfil);
+                                                        $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfill,$tipo,$contenido,null,null);
                                                         NOTICIA_REPOSITORY::UpdateById($idNoticia,$noticia);
                                                     }
                                                 }else if($tipo=="FOTO"){
                                                     if (isset($url)) {
-                                                        $duracion=0;
-                                                        $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfil,$tipo,null,$url,null);
+                                                        $fechai=new DateTime($fechainicio);
+                                                        $fechaf=new DateTime($fechafin);
+                                                        $diff=$fechaf->diff($fechai);
+                                                        $dias=$diff->days;
+                                                        $duracion=($dias*24*60*60)+($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
+                                                        $perfill=PERFIL_REPOSITORY::FindByID2($perfil);
+                                                        $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfill,$tipo,null,$url,null);
                                                         NOTICIA_REPOSITORY::UpdateById($idNoticia,$noticia);
                                                     }
                                                 }else if ($tipo=="VIDEO"){
                                                     if (isset($url)) {
                                                         if (isset($formato)){
+                                                            $fechai=new DateTime($fechainicio);
+                                                            $fechaf=new DateTime($fechafin);
+                                                            $diff=$fechaf->diff($fechai);
+                                                            $dias=$diff->days;
+                                                            $duracion=($dias*24*60*60);($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
                                                             $duracion=0;
-                                                            $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfil,$tipo,null,$url,$formato);
+                                                            $perfill=PERFIL_REPOSITORY::FindByID2($perfil);
+                                                            $noticia=new NOTICIA($idNoticia,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfill,$tipo,null,$url,$formato);
                                                             NOTICIA_REPOSITORY::UpdateById($idNoticia,$noticia);
                                                         }
                                                     }
@@ -56,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
                 }
 
-                NOTICIA_REPOSITORY::UpdateById($idNoticia, $noticia);
             }
         }
     }
@@ -94,16 +108,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     for ($i= 0;$i<count($noticias);$i++) {
                         echo '<tr>
                                 <td>'.$noticias[$i]->getId().'</td>
-                                <td><input type="text" name="fechainicio'.$i.' value="'.$noticias[$i]->getFechaInicio().'"</td>
-                                <td><input type="text" name="fechafin'.$i.' value="'.$noticias[$i]->getFechaFin().'"</td>
+                                <td><input type="text" name="fechainicio'.$i.'" value="'.$noticias[$i]->getFechainicio().'"></td>
+                                <td><input type="text" name="fechafin'.$i.'" value="'.$noticias[$i]->getFechaFin().'"></td>
                                 <td>'.$noticias[$i]->getDuracion().'</td>
-                                <td><input type="text" name="prioridad'.$i.' value="'.$noticias[$i]->getPrioridad().'"</td>
-                                <td><input type="text" name="titulo'.$i.' value="'.$noticias[$i]->getTitulo().'"</td>
-                                <td><input type="text" name="perfil'.$i.' value="'.$noticias[$i]->getPerfil()->getName().'"</td>
-                                <td><input type="text" name="tipo'.$i.' value="'.$noticias[$i]->getTipo().'"</td>
-                                <td><input type="text" name="contenido'.$i.' value="'.$noticias[$i]->getcontenido().'"</td>
-                                <td><input type="text" name="url'.$i.' value="'.$noticias[$i]->getUrl().'"</td>
-                                <td><input type="text" name="formato'.$i.' value="'.$noticias[$i]->getFormato().'"</td>
+                                <td><input type="text" name="prioridad'.$i.'" value="'.$noticias[$i]->getPrioridad().'"></td>
+                                <td><input type="text" name="titulo'.$i.'" value="'.$noticias[$i]->getTitulo().'"></td>
+                                <td><input type="text" name="perfil'.$i.'" value="'.$noticias[$i]->getPerfil()->getName().'"></td>
+                                <td><input type="text" name="tipo'.$i.'" value="'.$noticias[$i]->getTipo().'"></td>
+                                <td><input type="text" name="contenido'.$i.'" value="'.$noticias[$i]->getcontenido().'"></td>
+                                <td><input type="text" name="url'.$i.'" value="'.$noticias[$i]->getUrl().'"></td>
+                                <td><input type="text" name="formato'.$i.'" value="'.$noticias[$i]->getFormato().'"></td>
                                 <td><input type="submit" name="boton'.$i.'" value="ACTUALIZAR"></td>
                                </tr>';
                     }

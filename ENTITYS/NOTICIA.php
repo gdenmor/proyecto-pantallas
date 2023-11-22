@@ -15,14 +15,16 @@
 
         public function __construct($id, $fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfil,$tipo, $contenido,$url, $formato) {
             $this->id = $id;
-            $this->tipo = $tipo;
-            $this->url = $url;
-            $this->formato = $formato;
-            $this->contenido = $contenido;
+            $this->fechainicio = $fechainicio;
+            $this->fechafin = $fechafin;
             $this->duracion = $duracion;
-            $this->perfil = $perfil;
             $this->prioridad = $prioridad;
             $this->titulo = $titulo;
+            $this->perfil = $perfil;
+            $this->tipo = $tipo;
+            $this->contenido = $contenido;
+            $this->url = $url;
+            $this->formato = $formato;
         }
 
         //GETTERS Y SETTERS

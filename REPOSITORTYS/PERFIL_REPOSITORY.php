@@ -2,8 +2,8 @@
     class PERFIL_REPOSITORY{
         public static function FindByID($Perfil){
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->prepare("SELECT * FROM PERFIL WHERE nombre=upper(:nombreperfil)");
-            $resultado->bindParam(':nombreperfil', $Perfil, PDO::PARAM_STR);
+            $resultado = $conexion->prepare("SELECT * FROM PERFIL WHERE id=:id");
+            $resultado->bindParam(':id', $Perfil, PDO::PARAM_STR);
             $resultado->execute();
         
             $perfil = null;
@@ -18,7 +18,7 @@
         }
         public static function FindByID2($Perfil){
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->prepare("SELECT * FROM PERFIL WHERE id=:nombreperfil");
+            $resultado = $conexion->prepare("SELECT * FROM PERFIL WHERE nombre=:nombreperfil");
             $resultado->bindParam(':nombreperfil', $Perfil, PDO::PARAM_INT);
             $resultado->execute();
         

@@ -24,7 +24,7 @@
                 $prioridad=$tuplas->prioridad;
                 $titulo=$tuplas->titulo;
                 $id_perfil=$tuplas->id_perfil;
-                $perfil=PERFIL_REPOSITORY::FindByID2($id_perfil);
+                $perfil=PERFIL_REPOSITORY::FindByID($id_perfil);
                 $tipo=$tuplas->tipo;
                 $contenido=$tuplas->contenido;
                 $url=$tuplas->url;
@@ -41,7 +41,7 @@
 
         public static function FindPerfil($perfil){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->prepare("SELECT N.* from NOTICIAS N inner join PERFIL p on p.id=N.id_perfil where p.nombre=:nombre||p.nombre='TODOS'");
+            $resultado=$conexion->prepare("SELECT N.* from NOTICIAS N inner join PERFIL p on p.id=N.id_perfil where p.nombre=:nombre or p.nombre='TODOS'");
             $resultado->bindParam(":nombre",$perfil,PDO::PARAM_STR);
             $resultado->execute();
 
@@ -82,14 +82,24 @@
             $resultado=$conexion->prepare("DELETE from NOTICIAS where id=:idNoticia");
             $resultado->bindParam(":idNoticia",$idNoticia,PDO::PARAM_INT);
             $resultado->execute();
+            $filas=$resultado->rowCount();
 
+            if ($filas==0){
+                echo "Ninguna fue borrada";
+            }else{
+                echo $filas." "."filas borradas con éxito";
+            }
+
+            $success=$resultado->execute();
+
+            
         }
 
         public static function UpdateById($idNoticia,$objeto){
             $conexion=CONEXION::AbreConexion();
             $fechainicio=$objeto->getFechainicio();
             $fechafin=$objeto->getFechaFin();
-            $duracion=$objeto->getDuracion()->s;
+            $duracion=$objeto->getDuracion();
             $prioridad=$objeto->getPrioridad();
             $titulo=$objeto->getTitulo();
             $id_perfil=$objeto->getPerfil()->getId();
@@ -99,7 +109,7 @@
             $formato=$objeto->getFormato();
 
 
-            $resultado=$conexion->prepare("UPDATE NOTICIAS SET fechainicio=:fechainicio, fechafin=:fechafin, duracion=:duracion, prioridad=:prioridad,titulo=:titulo,idperfil=:idperfil,tipo=:tipo,contenido=:contenido,url=:url,formato=:formato where id=:id");
+            $resultado=$conexion->prepare("UPDATE NOTICIAS SET fechainicio=:fechainicio, fechafin=:fechafin, duracion=:duracion, prioridad=:prioridad,titulo=:titulo,id_perfil=:id_perfil,tipo=:tipo,contenido=:contenido,url=:url,formato=:formato where id=:id");
             $resultado->bindParam(":fechainicio",$fechainicio,PDO::PARAM_STR);
             $resultado->bindParam(":fechafin",$fechafin,PDO::PARAM_STR);
             $resultado->bindParam(":duracion",$duracion,PDO::PARAM_INT);
@@ -146,33 +156,6 @@
 
             
         }
-
-        /*public static function InsertAPI($objeto){
-            $conexion=CONEXION::AbreConexion();
-            $tipo=$objeto->tipo;
-            $url=$objeto->url;
-            $formato=$objeto->formato;
-            $contenido=$objeto->contenido;
-            $duracion=$objeto->duracion;
-            $perfil=$objeto->perfil;
-            $prioridad=$objeto->prioridad;
-            $titulo=$objeto->titulo;
-
-
-            $resultado=$conexion->prepare("INSERT INTO NOTICIAS (fechainicio,fechafin,duracion,prioridad,titulo,id_perfil,tipo,contenido,url,formato) VALUES (:fechainicio,:fechafin,:duracion,:prioridad,:titulo,:id_perfil,:tipo, :contenido,:url,:formato,:duracion,:titulo)");
-            $resultado->bindParam(":Tipo",$tipo,PDO::PARAM_STR);
-            $resultado->bindParam(":url",$url,PDO::PARAM_STR);
-            $resultado->bindParam(":formato",$formato,PDO::PARAM_STR);
-            $resultado->bindParam(":contenido",$contenido,PDO::PARAM_STR);
-            $resultado->bindParam(":duracion",$duracion,PDO::PARAM_INT);
-            $resultado->bindParam(":perfil",$perfil,PDO::PARAM_STR);
-            $resultado->bindParam(":prioridad",$prioridad,PDO::PARAM_INT);
-            $resultado->bindParam(":titulo",$prioridad,PDO::PARAM_STR);
-
-            $resultado->execute();
-
-            
-        }*/
 
         public static function FindBy($idNoticia) {
             $conexion = CONEXION::AbreConexion();

@@ -24,7 +24,13 @@
                                 if ($tipo=="WEB"){
                                     $contenido=$_POST['contenido'];
                                     if (!empty($contenido)&&strlen($contenido)> 0){
-                                        $duracion=0;
+                                        $fechaini=new DateTime($fechainicio);
+                                        $fechaf=new DateTime($fechafin);
+                                        $diff=$fechaf->diff($fechaini);
+                                        $dias=$diff->days;
+                                        //para calcularlo deberemos de tener en cuenta desde los dias e irlo pasando a segundos hasta
+                                        //llegar a los segundos
+                                        $duracion=($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
                                         $perfilbd=PERFIL_REPOSITORY::FindByID($perfil);
                                         $noticia=new NOTICIA(null,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfilbd,$tipo,null,$ruta,null);
                                         NOTICIA_REPOSITORY::Insert($noticia);
@@ -37,7 +43,13 @@
                                     $temporal=$_FILES['imagen']['tmp_name'];
                                     if (!empty($archivo)){
                                         if (move_uploaded_file($temporal, $ruta)){
-                                            $duracion=0;
+                                            $fechaini=new DateTime($fechainicio);
+                                            $fechaf=new DateTime($fechafin);
+                                            $diff=$fechaf->diff($fechaini);
+                                            $dias=$diff->days;
+                                            //para calcularlo deberemos de tener en cuenta desde los dias e irlo pasando a segundos hasta
+                                            //llegar a los segundos
+                                            $duracion=($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
                                             $perfilbd=PERFIL_REPOSITORY::FindByID($perfil);
                                             $noticia=new NOTICIA(null,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfilbd,$tipo,null,$ruta,null);
                                             NOTICIA_REPOSITORY::Insert($noticia);
@@ -56,7 +68,13 @@
                                         $formato=$_POST['formato'];
                                         if (!empty($formato)&&strlen($formato)>0){
                                             if (move_uploaded_file($formato, $ruta)){
-                                                $duracion=0;
+                                                $fechaini=new DateTime($fechainicio);
+                                                $fechaf=new DateTime($fechafin);
+                                                $diff=$fechaf->diff($fechaini);
+                                                $dias=$diff->days;
+                                                //para calcularlo deberemos de tener en cuenta desde los dias e irlo pasando a segundos hasta
+                                                //llegar a los segundos
+                                                $duracion=($dias * 24 * 60 * 60) + ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s;
                                                 $perfilbd=PERFIL_REPOSITORY::FindByID($perfil);
                                                 $noticia=new NOTICIA(null,$fechainicio,$fechafin,$duracion,$prioridad,$titulo,$perfilbd,$tipo,null,$ruta,$formato);
                                                 NOTICIA_REPOSITORY::Insert($noticia);

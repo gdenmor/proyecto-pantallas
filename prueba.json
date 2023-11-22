@@ -1,7 +1,30 @@
-{
-    "tipo": "VIDEO",
-    "url": "VIDEOS/188595 (1080p).mp4",
-    "formato": "video/mp4",
-    "contenido": "",
-    "duracion": "10"
-}
+[
+    {
+        "tipo": "IMAGEN",
+        "url": "IMAGES/Logo.png",
+        "formato": "",
+        "contenido": "",
+        "duracion": "10"
+    },
+    {
+        "tipo": "VIDEO",
+        "url": "VIDEOS/188595 (1080p).mp4",
+        "formato": "",
+        "contenido": "",
+        "duracion": "10"
+    },
+    {
+        "tipo": "IMAGEN",
+        "url": "IMAGES/DIAVELV4.png",
+        "formato": "",
+        "contenido": "",
+        "duracion": "10"
+    },
+    {
+        "tipo": "IMAGEN",
+        "url": "IMAGES/RSV4.png",
+        "formato": "",
+        "contenido": "",
+        "duracion": "10"
+    }
+]
