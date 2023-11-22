@@ -113,13 +113,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="../JS/validarCampos.js"></script>
 </head>
 <body>
 <body>
@@ -144,7 +138,7 @@
             <option value="PROFESOR">PROFESOR</option>
         </select><br><br>
         <label>TIPO:</label>
-        <select id="tipo" name="tipo" onchange="cambiarEstadoCampo()">
+        <select id="tipo" name="tipo">
             <option value="-" selected hidden></option>
             <option value="FOTO">FOTO</option>
             <option value="VIDEO">VIDEO</option>
@@ -159,40 +153,8 @@
 
         <input type="submit" value="CREAR">
     </form>
-    <div>
-        <?php
-            if($mensajeError== ""){
-                echo $mensajeError;
-            }
-        ?>
-    </div>
-        <script>
-            function cambiarEstadoCampo() {
-                var opcionSeleccionada = document.getElementById("tipo").value;
-                var campoContenido = document.getElementById("contenido");
-                var campoUrl = document.getElementById("url");
-                var campoFormato = document.getElementById("formato");
-                
-
-                if (opcionSeleccionada === "WEB") {
-                    campoContenido.disabled = false;
-                    campoUrl.disabled = true;
-                    campoFormato.disabled = true;
-
-                }
-                if (opcionSeleccionada === "FOTO") {
-                    campoContenido.disabled = true;
-                    campoUrl.disabled = false;
-                    campoFormato.disabled = true;
-
-                }
-                if (opcionSeleccionada === "VIDEO") {
-                    campoContenido.disabled = true;
-                    campoUrl.disabled = false;
-                    campoFormato.disabled = false;
-
-                }
-            }
-        </script>
+    <a href="http://localhost/proyecto-pantallas/FORMS/MUESTRANOTICIAS.php"><input type="button" value="MOSTRAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/BORRANOTICIAS.php"><input type="button" value="BORRAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/ACTUALIZANOTICIAS.php"><input type="button" value="ACTUALIZA NOTICIAS"></a>
 </body>
 </html>

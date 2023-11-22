@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="http://localhost/proyecto-pantallas/FORMS/CREANOTICIA.php"><input type="button" value="CREAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/BORRANOTICIAS.php"><input type="button" value="BORRAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/ACTUALIZANOTICIAS.php"><input type="button" value="ACTUALIZA NOTICIAS"></a>
     <table border="1">
         <thead>
             <th>ID</th>
@@ -24,7 +27,7 @@
             <?php
                 require_once "../HELPERS/AUTOLOAD.php";
                 $noticias=NOTICIA_REPOSITORY::FindAll();
-                if (count($noticias)> 0) {
+                if ($noticias!=null) {
                     for ($i= 0;$i<count($noticias);$i++) {
                         echo '<tr>
                                 <td>'.$noticias[$i]->getId().'</td>
@@ -40,6 +43,8 @@
                                 <td>'.$noticias[$i]->getFormato().'</td>
                                </tr>';
                     }
+                }else{
+                    echo "No existen más noticias";
                 }
             ?>
         </tbody>

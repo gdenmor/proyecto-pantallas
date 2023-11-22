@@ -6,7 +6,7 @@ window.addEventListener("load", function(){
     container.style.height = "100%";
     container.style.display="flex";
     var params=new URLSearchParams(this.window.location.search);
-    var perfil=params.get("perfil");
+    var perfil=params.get("pantalla");
     var i=0;
 
     this.fetch("../prueba.json", {

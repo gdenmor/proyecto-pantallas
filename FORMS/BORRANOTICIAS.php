@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <title>Document</title>
 </head>
 <body>
+    <a href="http://localhost/proyecto-pantallas/FORMS/MUESTRANOTICIAS.php"><input type="button" value="MOSTRAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/CREANOTICIA.php"><input type="button" value="CREAR NOTICIAS"></a>
+    <a href="http://localhost/proyecto-pantallas/FORMS/ACTUALIZANOTICIAS.php"><input type="button" value="ACTUALIZA NOTICIAS"></a>
 <form method="post">
 <table border="1">
         <thead>
