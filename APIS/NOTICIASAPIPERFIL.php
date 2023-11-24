@@ -1,7 +1,7 @@
 <?php
     require_once "../HELPERS/AUTOLOAD.php";
     SESSION::CreaSesion();
-    if ($_SERVER['REQUEST_METHOD']=="GET"){
+    if ($_SERVER['REQUEST_METHOD']=="GET"&&SESSION::estaLogueado('PANTALLA')){
         $perfil=$_GET['pantalla'];
         if ($perfil!= ''){
             $Noticias=NOTICIA_REPOSITORY::FindPerfil($perfil);
