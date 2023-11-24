@@ -147,7 +147,7 @@
         <label>Contenido de la noticia:</label>
         <textarea name="contenido" id="contenido" disabled></textarea><br><br>
         <label>URL:</label>
-        <input name="imagen" type="file" id="url" disabled><br><br>
+        <a href="http://localhost/proyecto-pantallas/FORMS/CREANOTICIA.php"><input name="imagen" type="button" id="url" value="SUBIR ARCHIVO" disabled></a><br><br>
         <label>Formato:</label>
         <input type="text" id="formato" disabled><br><br>
 

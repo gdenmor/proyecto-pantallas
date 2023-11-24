@@ -7,17 +7,17 @@
                 echo "Debe de introducir el perfil";
             }else{
                 if ($perfil=="alumno"){
-                    $user=PERFIL_REPOSITORY::FindByID2($perfil);
-                    SESSION::iniciaSesion('USER',$user,"http://localhost/proyecto-pantallas/FORMS/muestrapantalla.php?pantalla=alumno");
+                    $user=PERFIL_REPOSITORY::FindByID2(strtoupper($perfil));
+                    SESSION::iniciaSesion('PANTALLA',$user,"http://localhost/proyecto-pantallas/FORMS/muestrapantalla.php?pantalla=alumno");
                 }else if ($perfil=="profesor"){
                     $user=PERFIL_REPOSITORY::FindByID2($perfil);
-                    SESSION::iniciaSesion('USER',$user,"http://localhost/proyecto-pantallas/FORMS/muestrapantalla.php?pantalla=profesor");
+                    SESSION::iniciaSesion('PANTALLA',$user,"http://localhost/proyecto-pantallas/FORMS/muestrapantalla.php?pantalla=profesor");
                 }else{
                     echo "Error";
                 }
             }
         }else{
-            echo "Debe de introducir el perfil";
+            echo "Error";
         }
     }
 ?>

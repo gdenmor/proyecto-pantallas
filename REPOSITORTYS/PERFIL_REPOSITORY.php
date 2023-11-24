@@ -26,8 +26,7 @@
         
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
                 $id=$tuplas->id;
-                $nombre=$tuplas->nombre;
-                $perfil=new PERFIL($id,$nombre);
+                $perfil=new PERFIL($id,$Perfil);
             }
         
             return $perfil;

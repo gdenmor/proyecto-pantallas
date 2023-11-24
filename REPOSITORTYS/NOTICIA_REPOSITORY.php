@@ -183,5 +183,22 @@
         
             return $Noticia;
         }
+
+        public static function GeneraID(){
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->prepare("SELECT id,prioridad FROM NOTICIAS");
+            $resultado->execute();
+        
+            $Array = null;
+        
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $prioridad=$tuplas->prioridad;
+                
+                $Array[]=[$id,$prioridad];
+            }
+        
+            return $Array;
+        }
     }
 ?>
